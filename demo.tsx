@@ -3,24 +3,25 @@ import { ConstructionExplorer, type ConstructionActivity } from "./ConstructionE
 import "./construction-explorer.css";
 
 const activities: ConstructionActivity[] = [
-  { id: "terrassement", zone: "earthwork", title: "Terrassement", description: "Préparer les volumes et les niveaux du terrain avant la construction.", services: ["Décaissement", "Fouilles", "Plateformes"], href: "#terrassement" },
-  { id: "vrd", zone: "connections", title: "VRD", description: "Organiser les accès et les raccordements nécessaires au fonctionnement du site.", services: ["Tranchées techniques", "Regards", "Raccordements"], href: "#vrd" },
-  { id: "assainissement", zone: "drainage", title: "Assainissement", description: "Collecter et acheminer les eaux usées et les eaux pluviales.", services: ["Évacuations", "Caniveaux", "Drainage"], href: "#assainissement" },
-  { id: "voirie", zone: "road", title: "Voirie", description: "Créer des surfaces adaptées aux déplacements et au stationnement.", services: ["Accès véhicules", "Parkings", "Bordures"], href: "#voirie" },
-  { id: "reseaux", zone: "utilities", title: "Réseaux secs et humides", description: "Acheminer l’électricité, les télécommunications et l’eau jusqu’au bâtiment.", services: ["Fourreaux", "Télécom", "Eau potable"], href: "#reseaux" },
-  { id: "amenagements", zone: "landscaping", title: "Aménagements extérieurs", description: "Mettre en forme les espaces autour du bâtiment et réaliser les finitions.", services: ["Cours", "Cheminements", "Abords"], href: "#amenagements" }
+  { id: "earthwork", zone: "earthwork", title: "Earthwork", description: "Establish ground levels and prepare the site for construction.", services: ["Excavation", "Grading", "Foundation trenches"], href: "#earthwork" },
+  { id: "connections", zone: "connections", title: "Site connections", description: "Coordinate the access routes and utility connections serving a building.", services: ["Service trenches", "Access planning", "Utility connections"], href: "#connections" },
+  { id: "drainage", zone: "drainage", title: "Drainage", description: "Collect and convey wastewater and surface water through suitable infrastructure.", services: ["Drain pipes", "Inspection chambers", "Surface drainage"], href: "#drainage" },
+  { id: "road", zone: "road", title: "Access & paving", description: "Provide stable surfaces for vehicle access, parking and circulation.", services: ["Driveways", "Parking areas", "Kerbs"], href: "#road" },
+  { id: "utilities", zone: "utilities", title: "Utilities", description: "Route water, power and communication services beneath the ground.", services: ["Cable ducts", "Water supply", "Telecommunications"], href: "#utilities" },
+  { id: "landscaping", zone: "landscaping", title: "Outdoor spaces", description: "Organise the areas around the building and finish the external surfaces.", services: ["Courtyards", "Footpaths", "Boundary treatments"], href: "#landscaping" }
 ];
 
 function Demo() {
-  return <>
-    <header style={{ color: "#cbd6de", padding: "1.5rem", fontFamily: "system-ui", borderBottom: "1px solid #344752" }}>Interactive Construction Explorer · démonstration générique</header>
+  return <main style={{ maxWidth: "1120px", margin: "auto", padding: "36px 16px 48px", fontFamily: "system-ui,sans-serif", color: "#262626" }}>
+    <header style={{ display: "flex", justifyContent: "space-between", gap: "20px", alignItems: "center", marginBottom: "24px", fontSize: "12px", color: "#666" }}><span>Component preview</span><span>React / SVG</span></header>
     <ConstructionExplorer activities={activities} />
-    <section aria-label="Exemples de destinations" style={{ color: "#cbd6de", fontFamily: "system-ui", padding: "2rem", maxWidth: "1280px", margin: "auto" }}>
-      <h2>Pages de démonstration</h2>
-      <p>Ces destinations illustrent les liens vers les prestations. Remplacez-les par les pages de votre site.</p>
-      {activities.map(activity => <article id={activity.id} key={activity.id} style={{ paddingBlock: "1rem", borderTop: "1px solid #344752", scrollMarginTop: "1rem" }}><h3>{activity.title}</h3><p>{activity.description}</p></article>)}
-    </section>
-  </>;
+    <footer style={{ display: "flex", justifyContent: "space-between", gap: "16px", padding: "18px 4px", fontSize: "12px", color: "#737373" }}><span>Independent reference component</span><span>MIT license</span></footer>
+    <details style={{ marginTop: "16px", borderTop: "1px solid #dedede", paddingTop: "16px", fontSize: "13px", color: "#555" }}>
+      <summary style={{ cursor: "pointer", minHeight: "44px" }}>Example link destinations</summary>
+      <p>These sections are demonstration targets. Replace their URLs when integrating the component.</p>
+      {activities.map(activity => <article id={activity.id} key={activity.id} style={{ paddingBlock: "12px", borderTop: "1px solid #e3e3e3", scrollMarginTop: "16px" }}><h3>{activity.title}</h3><p>{activity.description}</p></article>)}
+    </details>
+  </main>;
 }
 
 createRoot(document.getElementById("root")!).render(<Demo />);

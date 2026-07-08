@@ -11,8 +11,9 @@ Création sur mesure, développée avec une assistance IA. Le dessin est vectori
 - Sélection d’un métier par des boutons explicites ou des repères sur le dessin.
 - Mise en évidence des parties du chantier concernées.
 - Fiche avec description, trois exemples, lien et photographie facultative.
-- Ordinateur : liste, illustration et fiche côte à côte à partir de 1200 px.
-- Téléphone : boutons sur deux colonnes, illustration puis fiche.
+- Présentation neutre : fond clair, illustration monochrome, contrôles en onglets et fiche latérale.
+- Ordinateur : commandes en haut, illustration à gauche et fiche à droite.
+- Téléphone : commandes sur deux colonnes, illustration puis fiche.
 - Boutons natifs utilisables au clavier, état `aria-pressed`, annonce de la fiche et focus visible.
 - Prise en compte de `prefers-reduced-motion`.
 - Identifiants SVG et ARIA propres à chaque instance grâce à `useId`.
