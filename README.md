@@ -1,47 +1,47 @@
 # Interactive Construction Explorer
 
-Un composant React pour découvrir les métiers d’un chantier à travers une illustration SVG en coupe : terrassement, VRD, assainissement, voirie, réseaux et aménagements extérieurs.
+A reusable React component for exploring construction trades through an interactive SVG cutaway: earthwork, site connections, drainage, access and paving, utilities, and outdoor spaces.
 
-Création sur mesure, développée avec une assistance IA. Le dessin est vectoriel : aucune bibliothèque 3D, aucun modèle téléchargé et aucun service externe ne sont nécessaires.
+Custom-built with AI assistance. The illustration is vector-based: no 3D library, downloaded model, or external service is required.
 
-![Aperçu du chantier interactif](preview.jpg)
+![Interactive construction explorer preview](preview.jpg)
 
-## Fonctionnalités
+## Features
 
-- Sélection d’un métier par des boutons explicites ou des repères sur le dessin.
-- Mise en évidence des parties du chantier concernées.
-- Fiche avec description, trois exemples, lien et photographie facultative.
-- Présentation neutre : fond clair, illustration monochrome, contrôles en onglets et fiche latérale.
-- Ordinateur : commandes en haut, illustration à gauche et fiche à droite.
-- Téléphone : commandes sur deux colonnes, illustration puis fiche.
-- Boutons natifs utilisables au clavier, état `aria-pressed`, annonce de la fiche et focus visible.
-- Prise en compte de `prefers-reduced-motion`.
-- Identifiants SVG et ARIA propres à chaque instance grâce à `useId`.
-- Aucune photo d’entreprise, marque client, donnée privée ou clé d’API dans ce dépôt.
+- Select a construction layer using explicit controls or numbered points on the illustration.
+- Highlight the relevant parts of the site.
+- Display a description, three examples, a detail link, and an optional photograph.
+- Neutral reference theme: light surfaces, a monochrome illustration, horizontal controls, and a side panel.
+- Desktop: controls above the diagram, illustration on the left, details on the right.
+- Mobile: two-column controls followed by the illustration and details.
+- Native keyboard-operable buttons, `aria-pressed` state, an announced detail panel, and visible focus indicators.
+- Support for `prefers-reduced-motion`.
+- Instance-specific SVG and ARIA identifiers generated with `useId`.
+- No client photographs, company branding, private data, or API keys in this repository.
 
-Le dessin est une illustration de principe, pas un plan technique d’exécution. Les fonctionnalités d’accessibilité décrites ne constituent pas une certification de conformité.
+The illustration is a schematic, not an engineering drawing. The accessibility features described here do not constitute a compliance certification.
 
-## Lancer la démonstration
+## Run the demo
 
-Prérequis : Node.js 22.12+ ou 24+, et npm.
+Requirements: Node.js 22.12+ or 24+, and npm.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Ouvrir l’adresse locale affichée par Vite. Les liens de la démonstration mènent à de vraies sections d’exemple sur la même page.
+Open the local URL printed by Vite. The demo links lead to example sections on the same page.
 
 ```sh
 npm run check
 npm run build
 ```
 
-La compilation produit une démonstration statique dans `dist/`. Aucun déploiement n’est effectué automatiquement.
+The build produces a static demo in `dist/`. It does not deploy anything automatically.
 
-## Intégration dans un projet React
+## Use in a React project
 
-Copier `ConstructionExplorer.tsx` et `construction-explorer.css` dans votre projet, puis importer le composant et sa feuille de style. La démonstration `demo.tsx` contient six activités prêtes à personnaliser.
+Copy `ConstructionExplorer.tsx` and `construction-explorer.css` into your project, then import the component and stylesheet. The `demo.tsx` file includes six activities you can customise.
 
 ```tsx
 import { ConstructionExplorer, type ConstructionActivity } from "./ConstructionExplorer";
@@ -49,12 +49,12 @@ import "./construction-explorer.css";
 
 const activities: ConstructionActivity[] = [
   {
-    id: "terrassement",
+    id: "earthwork",
     zone: "earthwork",
-    title: "Terrassement",
-    description: "Préparer les volumes et les niveaux de votre terrain.",
-    services: ["Décaissement", "Fouilles", "Plateformes"],
-    href: "/prestations/terrassement"
+    title: "Earthwork",
+    description: "Prepare the ground levels and layout of your site.",
+    services: ["Excavation", "Grading", "Foundation trenches"],
+    href: "/services/earthwork"
   }
 ];
 
@@ -63,47 +63,47 @@ export function Services() {
 }
 ```
 
-Ce dépôt distribue le code source ; il n’est pas publié comme paquet npm. React et React DOM sont les dépendances d’exécution. Vite et TypeScript servent à développer et compiler la démonstration.
+This repository distributes source code; it is not published as an npm package. React and React DOM are the runtime dependencies. Vite and TypeScript are used to develop and build the demo.
 
-### Zones disponibles
+### Available zones
 
-| `zone` | Partie mise en évidence |
+| `zone` | Highlighted area |
 | --- | --- |
-| `earthwork` | Sol et plateforme |
-| `connections` | Voirie et réseaux, pour une lecture d’ensemble des VRD |
-| `drainage` | Évacuations et regard |
-| `road` | Accès et revêtement |
-| `utilities` | Réseaux enterrés |
-| `landscaping` | Cour et abords |
+| `earthwork` | Ground and platform |
+| `connections` | Access surfaces and utilities, showing site connections together |
+| `drainage` | Drain pipes and inspection chamber |
+| `road` | Access route and paving |
+| `utilities` | Buried services |
+| `landscaping` | Courtyard and surrounding spaces |
 
-Utiliser une activité par zone, avec un `id` unique. L’ordre des activités peut être personnalisé. La première activité est sélectionnée au chargement. Un tableau vide n’affiche aucun module.
+Use one activity per zone and a unique `id` for each activity. The order can be customised. The first activity is selected initially. An empty array renders no component.
 
-### Propriétés du composant
+### Component props
 
-| Propriété | Description |
+| Prop | Description |
 | --- | --- |
-| `activities` | Liste des métiers, descriptions, exemples et liens |
-| `heading` | Titre personnalisable |
-| `introduction` | Texte d’introduction personnalisable |
-| `allActivitiesHref` | Lien facultatif vers l’ensemble des prestations |
+| `activities` | Activities, descriptions, examples, and links |
+| `heading` | Custom heading |
+| `introduction` | Custom introductory text |
+| `allActivitiesHref` | Optional link to all services |
 
-Une activité accepte une photo facultative :
+An activity can include an optional photograph:
 
 ```tsx
 photo: {
-  src: "/photos/mon-chantier.jpg",
-  alt: "Tranchées et fourreaux pendant les travaux",
-  caption: "Un chantier de votre entreprise",
-  href: "/realisations/mon-chantier"
+  src: "/photos/construction-site.jpg",
+  alt: "Service trenches and ducts during construction",
+  caption: "Example construction project",
+  href: "/projects/construction-site"
 }
 ```
 
-Utiliser vos propres photographies avec les droits nécessaires. Elles restent absentes de la démonstration générique. Les textes et liens sont des propriétés React, pas du HTML injecté.
+Use photographs you have permission to use. The generic demo does not include any. Text and links are passed as React props rather than injected HTML.
 
-## Personnalisation
+## Customisation
 
-Les couleurs, dimensions, seuils responsive et positions des repères sont définis dans `construction-explorer.css`. Les formes du terrain, de la maison et des réseaux sont dans `ConstructionExplorer.tsx`. La perspective est dessinée en SVG 2D ; il n’y a pas de scène WebGL.
+Colours, dimensions, responsive breakpoints, and point positions are defined in `construction-explorer.css`. The ground, building, and utility shapes are defined in `ConstructionExplorer.tsx`. The perspective is drawn in 2D SVG; there is no WebGL scene.
 
-## Licence
+## License
 
-MIT — voir [LICENSE](LICENSE). L’autorisation porte sur le code et l’illustration fournis ici, pas sur les contenus que vous ajouterez ensuite.
+MIT — see [LICENSE](LICENSE). The license covers the code and illustration supplied here, not any additional content you provide.
